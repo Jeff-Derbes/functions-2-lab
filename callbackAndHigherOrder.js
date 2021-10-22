@@ -104,7 +104,7 @@ contains(names, 'Colt', result => {
     console.log('Colt is not in the array')
   }
 })
-
+ 
 
 
 ////////// PROBLEM 5 //////////
@@ -149,22 +149,15 @@ console.log(uniq(names, callback =>
   Write a function called each that takes in an array of names and a callback function. 
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
-let arr = ['Jeff', 'Taylor', 'Elie']
 
 // CODE HERE 
-const findIndex = (arr, callback) => {
-  let names = [];
-  let index = []
-  for (let i = 0; i < arr.length; i++) {
-    names.push(arr[i]);
-    index.push(i)
-  }
-  return callback({names, index})
-}
-console.log(findIndex(arr, (names, index) => {
-  `The name at index ${index} is ${names}`
-}))
-/*
+const each = (arr, callback) => {
+    for(let i = 0; i < arr.length; i++) {
+      callback(arr[i], i)
+    }
+  };
+  
+  /*
   Invoke the each function, passing in the names array and a callback function.
   The callback function should take in two paremeters, item and index.
   The callback should print a string that says:
@@ -172,7 +165,7 @@ console.log(findIndex(arr, (names, index) => {
 */
 
 // CODE HERE
-
+each(names, (item, index) => console.log(`The item at index ${index} is ${item}`))
 
 ////////// PROBLEM 7 //////////
 
@@ -205,15 +198,27 @@ var users = [
 // Do not edit the code above.
 
 // CODE HERE 
+const getUserById = (arr, id, callback) => {
+  arr.forEach(el => {
+    if (el.id === id){
+      return callback(el)
+    }
+  })
+}
 
+// const getUserById = (arr, id, callback) => arr.forEach(elem =>{
+//   if (elem.id === id){
+//     callback(elem);
+//   }
+// })
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// getUserById(users, '16t', user => {
-//   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
-// })
+getUserById(users, '16t', user => {
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
+})
 
 ////////// CHALLENGE //////////
 
@@ -233,6 +238,12 @@ var users = [
 
 // CODE HERE
 
+const addingFactory = num1 => {
+  return function (num2){
+    return num1 + num2;
+  }
+}
+
 /*
   Now that you have addingFactory, you can create other
   functions from it. 
@@ -247,6 +258,8 @@ var users = [
 
 // CODE HERE
 
+let addTen = addingFactory(10)
+
 /*
   Now the inner function is stored in the addTen variable! 
 
@@ -258,6 +271,9 @@ var users = [
 */
 
 // CODE HERE
+
+console.log(addTen(5));
+console.log(addTen(30));
 
 /*
   Let's make another function from the addingFactory. 
@@ -271,3 +287,8 @@ var users = [
 */
 
 // CODE HERE
+
+addNumber = addingFactory(5);
+
+
+console.log(addNumber(3));
